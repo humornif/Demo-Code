@@ -23,7 +23,7 @@ namespace demo
                 outputColumnName: "forecasted_count",
                 inputColumnName: "count",
                 windowSize: 7,
-                seriesLength: 334,
+                seriesLength: 30,
                 trainSize: 334,
                 horizon: 7,
                 confidenceLevel: 0.95f,
@@ -31,6 +31,7 @@ namespace demo
                 confidenceUpperBoundColumn: "upper_count");
 
             SsaForecastingTransformer forecaster = forecastingPipeline.Fit(data1View);
+
             Evaluate(data2View, forecaster, mlContext);
 
             var forecastEngine = forecaster.CreateTimeSeriesEngine<ModelInput, ModelOutput>(mlContext);

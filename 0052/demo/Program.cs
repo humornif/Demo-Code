@@ -14,6 +14,9 @@ using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//builder.Services.AddEndpointsApiExplorer();
+//builder.Services.AddSwaggerGen();
+
 builder.Services.AddAuthorization();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
@@ -30,6 +33,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 });
 
 var app = builder.Build();
+
+//app.UseSwagger();
 
 app.UseAuthorization();
 app.UseAuthentication();
@@ -84,9 +89,5 @@ async Task GetTodoItems1(HttpContext http)
     await http.Response.WriteAsJsonAsync($"Done !!");
 }
 
-app.MapGet("/todoitems2", [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)] async (http) =>
-{
-    await http.Response.WriteAsJsonAsync($"Done !!");
-});
 
 app.Run();
